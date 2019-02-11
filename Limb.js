@@ -15,38 +15,59 @@ class Limb {
     }
 
     update() {
-        this.previousAngle = this.angle;
         this.angle += this.angularVelocity;
     }
 
     draw(backgroundCanvas, parentAngle = 0) {
-        push();
+        // push();
 
-        translate(this.position.x, this.position.y);
-        rotate(this.angle);
-        let previousVector = p5.Vector.fromAngle(this.previousAngle + parentAngle, this.length);
-        let vector = p5.Vector.fromAngle(this.angle + parentAngle, this.length);
+        // translate(this.position.x, this.position.y);
+        // rotate(this.angle);
+        // let previousVector = p5.Vector.fromAngle(this.previousAngle + parentAngle, this.length);
+        // let vector = p5.Vector.fromAngle(this.angle + parentAngle, this.length);
         
+        // backgroundCanvas.push();
+        // backgroundCanvas.translate(this.position.x, this.position.y);
+        // backgroundCanvas.rotate(this.angle);
+        // if(this.isDrawing)
+        //     backgroundCanvas.line(previousVector.x, previousVector.y, vector.x, vector.y);
+        
+        // push();
+        
+        // translate(vector.x, vector.y);
+        // backgroundCanvas.translate(vector.x, vector.y);
+        // this.children.forEach((entry) => {
+        //     let childVector = p5.Vector.fromAngle(entry.angle + this.angle, entry.length)
+        //     line(0, 0, childVector.x, childVector.y);
+        //     entry.draw(backgroundCanvas, this.angle);
+        // })
+
+        // pop();
+        // this.isDrawing ? fill('red') : fill('white');
+        // ellipse(vector.x, vector.y, 5, 5);
+        // backgroundCanvas.pop();
+        // pop();
+
+
+        push();
         backgroundCanvas.push();
-        backgroundCanvas.translate(this.position.x, this.position.y);
-        backgroundCanvas.rotate(this.angle);
+        let vector = p5.Vector.fromAngle(parentAngle, this.length);
+        translate(vector.x + this.position.x, vector.y + this.position.y);
+        backgroundCanvas.translate(vector.x + this.position.x, vector.y + this.position.y);
+        
         if(this.isDrawing)
-            backgroundCanvas.line(previousVector.x, previousVector.y, vector.x, vector.y);
-        
-        push();
-        
-        translate(vector.x, vector.y);
-        backgroundCanvas.translate(vector.x, vector.y);
-        this.children.forEach((entry) => {
-            let childVector = p5.Vector.fromAngle(entry.angle + this.angle, entry.length)
-            line(0, 0, childVector.x, childVector.y);
-            entry.draw(backgroundCanvas, this.angle);
-        })
+            backgroundCanvas.line(0, 0, 0, 0);
 
-        pop();
+        this.children.forEach((entry) => {
+            let childVector = p5.Vector.fromAngle(this.angle + parentAngle, entry.length)
+            line(0, 0, childVector.x, childVector.y);
+            entry.draw(backgroundCanvas, this.angle + parentAngle);
+        })
+        
         this.isDrawing ? fill('red') : fill('white');
-        ellipse(vector.x, vector.y, 5, 5);
+        ellipse(0, 0, 5, 5);
         backgroundCanvas.pop();
         pop();
+
     }
 }

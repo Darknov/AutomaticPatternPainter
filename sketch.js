@@ -3,7 +3,7 @@ let backgroundCanvas;
 let startingLimb;
 
 const limbs = [];
-
+const speed = 50;
 function setup() {
   createCanvas(600, 600);
   backgroundCanvas = createGraphics(600, 600);
@@ -13,24 +13,32 @@ function setup() {
   let test2 = addLimb(test);
   let test3 = addLimb(test2);
   let test4 = addLimb(test3);
-  let test5 = addLimb(test4);
-  // startingLimb.angularVelocity = 0.01;
-  // test.angularVelocity = 0.02;
-  // test3.angularVelocity = 0.03;
+
+  startingLimb.angularVelocity = 0.005;
+  test.angularVelocity = -0.03;
+  test2.angularVelocity = 0.21;
+  // startingLimb.isDrawing = true;
+
+  // test.length = 80;
+  // test3.length = 10;
+
+  // test3.angularVelocity = 0.1;
   // test4.angularVelocity = 0.05;
-  // test5.angularVelocity = 0.5;
-  test5.length = 10;
-  test5.isDrawing = true;
+  // test3.isDrawing = true;
+  test4.isDrawing = true;
   console.log(limbs);
 }
 
 function draw() {
-  background(255);
-  image(backgroundCanvas, 0, 0);
-  limbs.forEach((entry) => {
-    entry.update();
-  });
-  startingLimb.draw(backgroundCanvas);
+
+  for(let i = 0; i < speed; i++){
+    background(255);
+    image(backgroundCanvas, 0, 0);
+    limbs.forEach((entry) => {
+      entry.update();
+    });
+    startingLimb.draw(backgroundCanvas);
+  }
 }
 
 function setupStartingPoint() {
