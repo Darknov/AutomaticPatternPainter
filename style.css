@@ -1,14 +1,27 @@
 body {
-  padding: 0; 
-  margin: 0; 
+  padding: 0;
+  margin: 0;
   display: flex;
   background: gray;
 }
 
 #controls {
-    border-right-style: solid;
-    border-width: 2px;
-    float: right;
-    background: white;
-    padding: 10px;
+  border-right-style: solid;
+  border-width: 2px;
+  float: right;
+  background: white;
+  padding: 10px;
+}
+
+#attributes {
+  display: grid;
+  width: 300px;
+}
+
+#limbs {
+  display: grid;
+}
+
+.limb:hover{
+  background: red;
 }

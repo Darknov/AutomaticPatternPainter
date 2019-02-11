@@ -1,73 +1,52 @@
 class Limb {
-    constructor(id, position = {x: 0, y: 0}) {
-        this.id = id;
-        this.position = position;
-        this.children = [];
+  constructor(id, position = { x: 0, y: 0 }) {
+    this.id = id;
+    this.position = position;
+    this.children = [];
 
-        this.length = 30;
-        this.color = "black";
- 
-        this.angularVelocity = 0.00;
-        this.previousAngle = 0;
-        this.angle = 0;
+    this.length = 30;
+    this.color = "black";
 
-        this.isDrawing = false;
-    }
+    this.angularVelocity = 0.2;
+    this.previousAngle = 0;
+    this.angle = 0;
+    this.firstAngle = 1;
 
-    update() {
-        this.angle += this.angularVelocity;
-    }
+    this.isDrawing = false;
+    this.isSelected = false;
+  }
 
-    draw(backgroundCanvas, parentAngle = 0) {
-        // push();
+  update() {
+    this.angle += this.angularVelocity;
+  }
 
-        // translate(this.position.x, this.position.y);
-        // rotate(this.angle);
-        // let previousVector = p5.Vector.fromAngle(this.previousAngle + parentAngle, this.length);
-        // let vector = p5.Vector.fromAngle(this.angle + parentAngle, this.length);
-        
-        // backgroundCanvas.push();
-        // backgroundCanvas.translate(this.position.x, this.position.y);
-        // backgroundCanvas.rotate(this.angle);
-        // if(this.isDrawing)
-        //     backgroundCanvas.line(previousVector.x, previousVector.y, vector.x, vector.y);
-        
-        // push();
-        
-        // translate(vector.x, vector.y);
-        // backgroundCanvas.translate(vector.x, vector.y);
-        // this.children.forEach((entry) => {
-        //     let childVector = p5.Vector.fromAngle(entry.angle + this.angle, entry.length)
-        //     line(0, 0, childVector.x, childVector.y);
-        //     entry.draw(backgroundCanvas, this.angle);
-        // })
+  draw(backgroundCanvas, parentAngle = 0) {
+    push();
+    backgroundCanvas.push();
+    let vector = p5.Vector.fromAngle(parentAngle + this.firstAngle, this.length);
+    translate(vector.x + this.position.x, vector.y + this.position.y);
+    backgroundCanvas.translate(
+      vector.x + this.position.x,
+      vector.y + this.position.y
+    );
+    if(this.isSelected) {
+      fill("#00FF00");
+      rect(-6, -6, 12, 12);
+    } 
+    if (this.isDrawing) backgroundCanvas.point(0, 0);
 
-        // pop();
-        // this.isDrawing ? fill('red') : fill('white');
-        // ellipse(vector.x, vector.y, 5, 5);
-        // backgroundCanvas.pop();
-        // pop();
+    this.children.forEach(entry => {
+      let childVector = p5.Vector.fromAngle(
+        this.angle + parentAngle + this.firstAngle,
+        entry.length
+      );
+      line(0, 0, childVector.x, childVector.y);
+      entry.draw(backgroundCanvas, this.angle + parentAngle);
+    });
 
-
-        push();
-        backgroundCanvas.push();
-        let vector = p5.Vector.fromAngle(parentAngle, this.length);
-        translate(vector.x + this.position.x, vector.y + this.position.y);
-        backgroundCanvas.translate(vector.x + this.position.x, vector.y + this.position.y);
-        
-        if(this.isDrawing)
-            backgroundCanvas.line(0, 0, 0, 0);
-
-        this.children.forEach((entry) => {
-            let childVector = p5.Vector.fromAngle(this.angle + parentAngle, entry.length)
-            line(0, 0, childVector.x, childVector.y);
-            entry.draw(backgroundCanvas, this.angle + parentAngle);
-        })
-        
-        this.isDrawing ? fill('red') : fill('white');
-        ellipse(0, 0, 5, 5);
-        backgroundCanvas.pop();
-        pop();
-
-    }
+    this.isDrawing ? fill("red") : fill("white");
+    ellipse(0, 0, 5, 5);
+    backgroundCanvas.pop();
+    pop();
+  }
 }

@@ -13,14 +13,32 @@
   </head>
   <body>
     <div id="controls">
-      <div id="limbs">
-        TODO
+      <div id="limbs"> 
       </div>
-      <button>Add limb</button>
-      <button>Delete limb</button><br /><br />
-      <div id="limb-attributes">
-        <label>Length: </label><input type="number" id="length" /><br />
-        <label>Color: </label><input type="text" id="color" />
+      <div id="limb-manager">
+        <button>Add limb</button>
+        <button>Delete limb</button>
+        <button>Reset limbs</button>
+      </div>
+      <br />
+
+      <div id="canvas-manager">
+        <button onclick="resetCanvas()">Start</button>
+        <button onclick="resetCanvas()">Stop</button>
+        <button onclick="resetCanvas()">Reset Canvas</button>
+      </div>
+      <br />
+      <div id="attributes">
+        <label>Overall speed: </label>
+        <input type="number" id="speed" onchange="changedSpeed()"/>
+        <label>Length: </label>
+        <input type="number" id="length" onchange="changedLength()"/>
+        <label>Angle: </label>
+        <input type="number" id="angle" onchange="changedAngle()"/>
+        <label>Angular Velocity: </label>
+        <input type="number" id="angular-velocity" onchange="changedAngularVelocity()"/>
+        <label>Color: </label>
+        <input type="text" id="color" onchange="changedColor()"/>
       </div>
     </div>
   </body>
