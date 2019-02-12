@@ -13,32 +13,40 @@
   </head>
   <body>
     <div id="controls">
-      <div id="limbs"> 
-      </div>
+      <div id="limbs"></div>
       <div id="limb-manager">
-        <button>Add limb</button>
-        <button>Delete limb</button>
-        <button>Reset limbs</button>
+        <!-- TODO -->
+        <!-- <button>Add limb</button> -->
+        <!-- <button onclick="deleteLimb()">Delete limb</button> -->
+        <!-- <button>Reset limbs</button> -->
       </div>
       <br />
 
       <div id="canvas-manager">
-        <button onclick="resetCanvas()">Start</button>
-        <button onclick="resetCanvas()">Stop</button>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
         <button onclick="resetCanvas()">Reset Canvas</button>
       </div>
       <br />
       <div id="attributes">
         <label>Overall speed: </label>
-        <input type="number" id="speed" onchange="changedSpeed()"/>
+        <input type="number" id="speed" onchange="changedSpeed()" />
         <label>Length: </label>
-        <input type="number" id="length" onchange="changedLength()"/>
+        <input type="number" id="length" onchange="changedLength()" />
         <label>Angle: </label>
-        <input type="number" id="angle" onchange="changedAngle()"/>
+        <input type="number" id="angle" onchange="changedAngle()" />
         <label>Angular Velocity: </label>
-        <input type="number" id="angular-velocity" onchange="changedAngularVelocity()"/>
+        <input
+          type="number"
+          id="angular-velocity"
+          onchange="changedAngularVelocity()"
+        />
         <label>Color: </label>
-        <input type="text" id="color" onchange="changedColor()"/>
+        <input type="text" id="color" onchange="changedColor()" />
+        <div>
+          <label for="isDrawing">Limb is drawing:</label>
+          <input type="checkbox" id="isDrawing" name="isDrawing" checked />
+        </div>
       </div>
     </div>
   </body>

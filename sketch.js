@@ -2,8 +2,10 @@ let backgroundCanvas;
 
 let startingLimb;
 let currentLimb;
-const limbs = [];
+let limbs = [];
+
 let speed = 1;
+let isRunning = true;
 function setup() {
   createCanvas(600, 600);
   backgroundCanvas = createGraphics(600, 600);
@@ -14,25 +16,28 @@ function setup() {
   startingLimb.isSelected = true;
   let test = addLimb(startingLimb);
   let test2 = addLimb(test);
-  let test3 = addLimb(test2);
-  let test4 = addLimb(test3);
+  // let test3 = addLimb(test2);
+  // let test4 = addLimb(test3);
 
   startingLimb.angularVelocity = 0.005;
   test.angularVelocity = -0.03;
   test2.angularVelocity = 0.21;
 
-  test4.isDrawing = true;
-  console.log(limbs);
+  test2.isDrawing = true;
 }
 
 function draw() {
-  for (let i = 0; i < speed; i++) {
-    background(255);
-    image(backgroundCanvas, 0, 0);
-    limbs.forEach(entry => {
-      entry.update();
-    });
-    startingLimb.draw(backgroundCanvas);
+  // todo: isRunning should have effect only on drawing, not on limbs in app(e.g you should be able to change and immediately see
+  // changes in attributes)
+  if (isRunning) {
+    for (let i = 0; i < speed; i++) {
+      background(255);
+      image(backgroundCanvas, 0, 0);
+      limbs.forEach(entry => {
+        entry.update();
+      });
+      startingLimb.draw(backgroundCanvas);
+    }
   }
 }
 
@@ -87,11 +92,26 @@ function changeSelected(e) {
   updateAttributes();
 }
 
+function deleteLimb() {
+  for (let i = 0; i < limbs.length; i++) {
+    if (limbs[i].id === currentLimb.id) {
+      limbs = limbs.splice(i, 1);
+      i = 0;
+    }
+    for (let j = 0; j < limbs[i].children.length; j++) {
+      if (limbs[i].children[j].id === currentLimb.id) {
+        limbs[i].children = limbs[i].children.splice(j, 1);
+      }
+    }
+  }
+  currentLimb = limbs[0];
+  updateLimbList();
+}
+
 function updateAttributes() {
   document.getElementById("speed").value = speed;
   document.getElementById("length").value = currentLimb.length;
-  document.getElementById("angle").value =
-  currentLimb.firstAngle;
+  document.getElementById("angle").value = currentLimb.firstAngle;
   document.getElementById("angular-velocity").value =
     currentLimb.angularVelocity;
   document.getElementById("color").value = currentLimb.color;
@@ -112,9 +132,7 @@ function changedAngularVelocity() {
 }
 
 function changedAngle() {
-  currentLimb.angle = parseFloat(
-    document.getElementById("angle").value
-  );
+  currentLimb.angle = parseFloat(document.getElementById("angle").value);
 }
 
 function changedColor() {
@@ -123,4 +141,12 @@ function changedColor() {
 
 function addLimbButton() {
   addLimb();
+}
+
+function stop() {
+  isRunning = false;
+}
+
+function start() {
+  isRunning = true;
 }
