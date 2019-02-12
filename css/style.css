@@ -22,6 +22,6 @@ body {
   display: grid;
 }
 
-.limb:hover{
+.limb:hover {
   background: red;
 }
