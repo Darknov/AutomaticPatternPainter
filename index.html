@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Automatic Pattern Painter</title>
-        <link href="./css/style.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Pattern Painter</title>
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <script src="p5.js"></script>
-    <script type="module" src="./js/main.js"></script>
+  </head>
+  <body>
+    <div id="controls">
+      <div id="limbs"></div>
+      <div id="limb-manager">
+        <button id="addLimb">Add limb</button>
+        <button id="deleteLimb">Delete limb</button>
+        <button id="resetLimb">Reset limbs</button>
+      </div>
+      <br />
+
+      <div id="canvas-manager">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="resetCanvas">Reset Canvas</button>
+      </div>
+      <br />
+      <div id="attributes">
+        <label>Overall speed: </label>
+        <input type="number" id="speed" value="1.0" />
+        <label>Length: </label>
+        <input type="number" id="length" />
+        <label>Angle: </label>
+        <input type="number" id="angle" />
+        <label>Angular Velocity: </label>
+        <input type="number" id="angular-velocity" />
+        <label>Color: </label>
+        <input type="text" id="color" />
+        <div>
+          <label for="isDrawing">Limb is drawing:</label>
+          <input type="checkbox" id="isDrawing" name="isDrawing" checked />
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script type="module" src="./js/main.js"></script>
 </html>
